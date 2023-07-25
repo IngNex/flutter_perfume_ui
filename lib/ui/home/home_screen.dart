@@ -23,17 +23,25 @@ class HomeScreen extends StatelessWidget {
       'assets/perfume/9.png',
       'assets/perfume/10.png',
     ];
+    final bottomBar = [
+      Icons.home,
+      Icons.shopping_bag_outlined,
+      Icons.sms_outlined,
+      Icons.notifications_none,
+      Icons.person_outlined,
+    ];
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.sort,
                     size: 30,
                   ),
@@ -95,15 +103,17 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
+              const SizedBox(height: 10),
+              SizedBox(
                 height: 280,
                 child: ListView.builder(
                   itemCount: newPerfume.length,
                   scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(bottom: 20),
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
-                      width: 165,
+                      width: 170,
                       margin:
                           const EdgeInsets.only(right: 20, top: 10, bottom: 10),
                       decoration: BoxDecoration(
@@ -118,8 +128,40 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(image: AssetImage(perfume[index])),
+                          Image(
+                            image: AssetImage(perfume[index]),
+                          ),
+                          const Text(
+                            'CK ONE',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const Text(
+                            'Calvin Klein',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: List.generate(
+                                  3,
+                                  (index) => const Icon(
+                                    Icons.star,
+                                    size: 15,
+                                    color: Colors.yellow,
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                '(1.3k Reviews+more)',
+                                style: TextStyle(fontSize: 9),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     );
@@ -165,6 +207,7 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(height: 10),
               Expanded(
                 child: Stack(
                   children: [
@@ -286,22 +329,35 @@ class HomeScreen extends StatelessWidget {
                     Positioned(
                       left: 0,
                       right: 0,
-                      bottom: 0,
+                      bottom: 5,
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        padding: const EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                           color: Colors.red.shade900,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(Icons.add),
-                              Icon(Icons.add),
-                              Icon(Icons.add),
-                              Icon(Icons.add),
-                            ]),
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: List.generate(
+                            bottomBar.length,
+                            (index) => Padding(
+                              padding: index == 0
+                                  ? const EdgeInsets.only(right: 20)
+                                  : EdgeInsets.zero,
+                              child: CircleAvatar(
+                                backgroundColor: index == 0
+                                    ? Color.fromARGB(235, 255, 255, 255)
+                                    : Colors.red.shade900,
+                                radius: 30,
+                                child: Icon(bottomBar[index],
+                                    size: 30,
+                                    color: index == 0
+                                        ? Colors.red.shade900
+                                        : Color.fromARGB(235, 255, 255, 255)),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
