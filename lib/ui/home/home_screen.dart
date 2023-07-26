@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_perfume_ui/ui/detaiils/details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,7 +10,7 @@ class HomeScreen extends StatelessWidget {
       'assets/perfume/9.png',
       'assets/perfume/7.png',
       'assets/perfume/4.png',
-      'assets/perfume/1.png',
+      'assets/perfume/2.png',
     ];
     final perfume = [
       'assets/perfume/1.png',
@@ -112,57 +113,78 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 20),
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Container(
-                      width: 170,
-                      margin:
-                          const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            const Color.fromARGB(0, 255, 255, 255),
-                            Colors.red.shade100,
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage(perfume[index]),
-                          ),
-                          const Text(
-                            'CK ONE',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const Text(
-                            'Calvin Klein',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: List.generate(
-                                  3,
-                                  (index) => const Icon(
-                                    Icons.star,
-                                    size: 15,
-                                    color: Colors.yellow,
-                                  ),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            transitionDuration:
+                                const Duration(milliseconds: 700),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 700),
+                            pageBuilder: (context, animation, _) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: DetailsScreen(
+                                  index: index,
+                                  product: newPerfume[index],
                                 ),
-                              ),
-                              const Text(
-                                '(1.3k Reviews+more)',
-                                style: TextStyle(fontSize: 9),
-                              ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 170,
+                        margin: const EdgeInsets.only(
+                            right: 20, top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              const Color.fromARGB(0, 255, 255, 255),
+                              Colors.red.shade100,
                             ],
                           ),
-                        ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: AssetImage(newPerfume[index]),
+                            ),
+                            const Text(
+                              'CK ONE',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            const Text(
+                              'Calvin Klein',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: List.generate(
+                                    3,
+                                    (index) => const Icon(
+                                      Icons.star,
+                                      size: 15,
+                                      color: Colors.yellow,
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  '(1.3k Reviews+more)',
+                                  style: TextStyle(fontSize: 9),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -213,115 +235,137 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     ListView.builder(
                       itemCount: perfume.length,
+                      padding: const EdgeInsets.only(bottom: 80),
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.all(8.0),
-                          height: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.red.shade50,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.red.shade100,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                transitionDuration:
+                                    const Duration(milliseconds: 700),
+                                reverseTransitionDuration:
+                                    const Duration(milliseconds: 700),
+                                pageBuilder: (context, animation, _) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: DetailsScreen(
+                                      index: index,
+                                      product: perfume[index],
                                     ),
-                                    child: Image(
-                                      width: 100,
-                                      image: AssetImage(perfume[index]),
-                                    ),
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Emporio Armani',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                          Text("Because It's You"),
-                                          Text(
-                                            "Quantity",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                          Text(
-                                            '100 ml',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          )
-                                        ],
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(8.0),
+                            height: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade50,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.red.shade100,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Icon(
-                                            Icons.favorite_border_rounded,
-                                            color: Colors.red.shade900,
-                                          ),
-                                          const Column(
-                                            children: [
-                                              Text(
-                                                'price',
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 12,
+                                      child: Image(
+                                        width: 100,
+                                        image: AssetImage(perfume[index]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Emporio Armani',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
+                                            Text("Because It's You"),
+                                            Text(
+                                              "Quantity",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
+                                            Text(
+                                              '100 ml',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Icon(
+                                              Icons.favorite_border_rounded,
+                                              color: Colors.red.shade900,
+                                            ),
+                                            const Column(
+                                              children: [
+                                                Text(
+                                                  'price',
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 12,
+                                                  ),
                                                 ),
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    '\$',
-                                                    style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                      '\$',
+                                                      style: TextStyle(
+                                                        fontSize: 11,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    '299',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                    Text(
+                                                      '299',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       },
